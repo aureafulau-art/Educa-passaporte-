@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDUCA+ Passaporte | Aprender. Construir. Transformar.</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f9;color:#1a2332;line-height:1.5}
+header{background:linear-gradient(135deg,#0d2b5e 0%,#1a4a8c 50%,#2a6bb7 100%);color:white;padding:18px 16px;text-align:center;position:relative}
+header h1{font-size:22px;font-weight:700;letter-spacing:.5px}
+header .slogan{font-size:13px;opacity:.9;margin-top:4px}
+header .badge{display:inline-block;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:20px;font-size:11px;margin-top:8px}
+nav{display:flex;overflow-x:auto;background:#fff;border-bottom:1px solid #d0d8e4;position:sticky;top:0;z-index:10;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+nav button{border:0;background:transparent;padding:13px 14px;white-space:nowrap;font-weight:600;font-size:13px;color:#3a5070;cursor:pointer;border-bottom:3px solid transparent;transition:.2s}
+nav button.active{color:#0d2b5e;border-bottom-color:#0d2b5e;background:#eef3fb}
+nav button:hover{background:#f5f8fc}
+main{max-width:920px;margin:0 auto;padding:16px}
+.page{display:none}.page.active{display:block}
+.card{background:#fff;border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.hero{background:linear-gradient(135deg,#0d2b5e,#1e5aab);color:#fff;border-radius:16px;padding:28px 22px;margin-bottom:16px}
+.hero h2{font-size:22px;margin-bottom:8px}
+.hero p{opacity:.92;font-size:14px;margin-bottom:16px}
+.btn{border:0;border-radius:9px;padding:11px 16px;background:#0d2b5e;color:#fff;font-weight:600;font-size:14px;cursor:pointer;margin:6px 6px 0 0;transition:.15s}
+.btn:hover{background:#163a7a}
+.btn.secondary{background:#e4ecf7;color:#0d2b5e}
+.btn.danger{background:#c0392b}
+.btn.success{background:#1a7a4c}
+.btn.green{background:#1e8a4c}
+label{display:block;font-weight:600;font-size:13px;margin:12px 0 5px;color:#2a3a50}
+input,textarea,select{width:100%;padding:11px 12px;border:1.5px solid #c8d2e0;border-radius:9px;font-size:14px;background:#fafbfd}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#1a4a8c;background:#fff}
+textarea{min-height:80px;resize:vertical}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.stat-card{background:#fff;border-radius:12px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.stat-card .num{font-size:28px;font-weight:700;color:#0d2b5e}
+.stat-card .lbl{font-size:12px;color:#5a6a80;margin-top:2px}
+.item{border:1px solid #d8e0ec;border-radius:10px;padding:12px 14px;margin-top:10px;background:#fafbfd}
+.tag{display:inline-block;background:#e4ecf7;color:#0d2b5e;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;margin:3px}
+.muted{color:#6a7a90;font-size:13px}
+h2{color:#0d2b5e;font-size:18px;margin-bottom:6px}
+h3{color:#1a4a8c;font-size:15px;margin:14px 0 6px}
+.feature-list{list-style:none;padding:0}
+.feature-list li{padding:8px 0;border-bottom:1px solid #eef1f6;font-size:14px}
+.feature-list li:before{content:"▸ ";color:#1a4a8c;font-weight:700}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.two-col{grid-template-columns:1fr}}
+#qr{display:flex;justify-content:center;margin:16px 0}
+.resource{display:flex;align-items:flex-start;gap:12px;padding:12px;border:1px solid #d8e0ec;border-radius:10px;margin-top:10px;background:#fafbfd}
+.resource .icon{width:40px;height:40px;border-radius:10px;background:#e4ecf7;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.resource .info h4{font-size:14px;color:#0d2b5e;margin-bottom:2px}
+.resource .info p{font-size:12px;color:#6a7a90}
+.badge-green{background:#d4edda;color:#155724;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.badge-blue{background:#cce5ff;color:#004085;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.badge-orange{background:#fff3cd;color:#856404;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+footer{text-align:center;padding:24px 16px;color:#6a7a90;font-size:12px;border-top:1px solid #e0e6ef;margin-top:20px}
+.tab-section{margin-top:8px}
+.progress-bar{height:8px;background:#e4ecf7;border-radius:10px;overflow:hidden;margin:8px 0}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,#1a4a8c,#2a8a5c);border-radius:10px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>EDUCA+ Passaporte</h1>
+  <div class="slogan">Aprender. Construir. Transformar.</div>
+  <div class="badge">Plataforma de apoio à educação · Moçambique</div>
+</header>
+
+<nav>
+  <button class="tab active" onclick="show('inicio',this)">Início</button>
+  <button class="tab" onclick="show('materiais',this)">Materiais</button>
+  <button class="tab" onclick="show('exercicios',this)">Exercícios</button>
+  <button class="tab" onclick="show('bolsas',this)">Bolsas</button>
+  <button class="tab" onclick="show('orientacao',this)">Orientação</button>
+  <button class="tab" onclick="show('passaporte',this)">Meu Passaporte</button>
+  <button class="tab" onclick="show('caminho',this)">Meu Caminho</button>
+  <button class="tab" onclick="show('partilha',this)">Partilhar</button>
+</nav>
+
+<main>
+
+<!-- ========== INÍCIO ========== -->
+<section id="inicio" class="page active">
+  <div class="hero">
+    <h2>Organize o que sabe. Descubra o que pode.</h2>
+    <p>O EDUCA+ Passaporte reúne materiais de estudo, exercícios, bolsas e orientação académica com o seu Passaporte Digital — competências, certificados, projetos e trajetória.</p>
+    <button class="btn" onclick="show('passaporte',document.querySelectorAll('.tab')[5])">Abrir Meu Passaporte</button>
+    <button class="btn secondary" onclick="show('materiais',document.querySelectorAll('.tab')[1])">Ver Materiais</button>
+  </div>
+
+  <div class="grid">
+    <div class="stat-card"><div class="num" id="nComp">0</div><div class="lbl">Competências</div></div>
+    <div class="stat-card"><div class="num" id="nProj">0</div><div class="lbl">Projetos</div></div>
+    <div class="stat-card"><div class="num" id="nCert">0</div><div class="lbl">Certificados</div></div>
+    <div class="stat-card"><div class="num" id="nMat">6</div><div class="lbl">Materiais</div></div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Como funciona?</h2>
+    <ul class="feature-list">
+      <li><strong>Materiais, exercícios, bolsas e orientação</strong> — recursos para estudar e descobrir oportunidades</li>
+      <li><strong>Meu Passaporte</strong> — perfil, competências, certificados, projetos e partilha</li>
+      <li><strong>Meu Caminho</strong> — reflexão sobre interesses e possíveis áreas de estudo</li>
+      <li>Tudo num só lugar, pensado para o estudante moçambicano</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Fluxo do estudante</h2>
+    <p class="muted">Estudar → Praticar → Descobrir oportunidades → Construir o Passaporte → Partilhar</p>
+    <div class="progress-bar"><div class="fill" style="width:70%"></div></div>
+  </div>
+</section>
+
+<!-- ========== MATERIAIS (EDUCA+) ========== -->
+<section id="materiais" class="page">
+  <div class="card">
+    <h2>Materiais de Estudo</h2>
+    <p class="muted">Conteúdos organizados por disciplina (versão demonstração).</p>
+
+    <div class="resource">
+      <div class="icon">📘</div>
+      <div class="info">
+        <h4>Matemática — Funções e Gráficos</h4>
+        <p>11ª classe · PDF + exercícios resolvidos</p>
+        <span class="badge-blue">Disciplina</span>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">🔬</div>
+      <div class="info">
+        <h4>Física — Leis de Newton</h4>
+        <p>10ª e 11ª classe · Resumo + exemplos</p>
+        <span class="badge-blue">Disciplina</span>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">💻</div>
+      <div class="info">
+        <h4>Informática — Introdução à Programação</h4>
+        <p>Noções de algoritmos e lógica</p>
+        <span class="badge-green">TICs</span>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">📝</div>
+      <div class="info">
+        <h4>Português — Técnicas de Redação</h4>
+        <p>Argumentação e estrutura textual</p>
+        <span class="badge-blue">Disciplina</span>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">🌍</div>
+      <div class="info">
+        <h4>Geografia — Moçambique e a Região</h4>
+        <p>Recursos naturais e desenvolvimento</p>
+        <span class="badge-blue">Disciplina</span>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">⚡</div>
+      <div class="info">
+        <h4>Eletricidade Básica</h4>
+        <p>Circuitos simples e segurança</p>
+        <span class="badge-orange">Técnico</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== EXERCÍCIOS (EDUCA+) ========== -->
+<section id="exercicios" class="page">
+  <div class="card">
+    <h2>Exercícios e Questionários</h2>
+    <p class="muted">Pratique e acompanhe o seu progresso.</p>
+
+    <div class="resource">
+      <div class="icon">✏️</div>
+      <div class="info">
+        <h4>Quiz de Matemática — Funções</h4>
+        <p>10 questões · Nível intermédio</p>
+        <button class="btn" style="margin-top:8px;padding:7px 12px;font-size:13px" onclick="alert('Em versão completa: abre o questionário (Google Forms ou interno).')">Iniciar</button>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">🧪</div>
+      <div class="info">
+        <h4>Quiz de Física — Mecânica</h4>
+        <p>8 questões · Conceitos fundamentais</p>
+        <button class="btn" style="margin-top:8px;padding:7px 12px;font-size:13px" onclick="alert('Em versão completa: abre o questionário.')">Iniciar</button>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">💡</div>
+      <div class="info">
+        <h4>Lógica de Programação</h4>
+        <p>Desafios simples de algoritmos</p>
+        <button class="btn" style="margin-top:8px;padding:7px 12px;font-size:13px" onclick="alert('Em versão completa: abre o questionário.')">Iniciar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BOLSAS (EDUCA+) ========== -->
+<section id="bolsas" class="page">
+  <div class="card">
+    <h2>Bolsas e Oportunidades</h2>
+    <p class="muted">Oportunidades académicas e de formação (exemplos demonstrativos).</p>
+
+    <div class="resource">
+      <div class="icon">🎓</div>
+      <div class="info">
+        <h4>Bolsa de Mérito — Ensino Superior</h4>
+        <p>Requisitos: média ≥ 14 · Prazo: a definir pela instituição</p>
+        <span class="badge-green">Aberta</span>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">🌐</div>
+      <div class="info">
+        <h4>Curso Online de TICs (gratuito)</h4>
+        <p>Certificado digital · Duração: 4 semanas</p>
+        <span class="badge-blue">Formação</span>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">🏫</div>
+      <div class="info">
+        <h4>Programa de Estágio Técnico</h4>
+        <p>Áreas: eletricidade, informática, administração</p>
+        <span class="badge-orange">Estágio</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ORIENTAÇÃO (EDUCA+) ========== -->
+<section id="orientacao" class="page">
+  <div class="card">
+    <h2>Orientação Académica</h2>
+    <p class="muted">Cursos, carreiras e instituições — informação para reflexão (não determina a profissão).</p>
+
+    <div class="resource">
+      <div class="icon">🖥️</div>
+      <div class="info">
+        <h4>Área de Tecnologias</h4>
+        <p>Informática, redes, desenvolvimento de software, suporte técnico</p>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">⚡</div>
+      <div class="info">
+        <h4>Área Técnica / Industrial</h4>
+        <p>Eletricidade, mecânica, construção civil</p>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">🏥</div>
+      <div class="info">
+        <h4>Área da Saúde</h4>
+        <p>Enfermagem, farmácia, saúde pública</p>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">📊</div>
+      <div class="info">
+        <h4>Área de Gestão e Economia</h4>
+        <p>Administração, contabilidade, empreendedorismo</p>
+      </div>
+    </div>
+    <div class="resource">
+      <div class="icon">📚</div>
+      <div class="info">
+        <h4>Área de Educação e Ciências Sociais</h4>
+        <p>Ensino, psicologia, comunicação</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MEU PASSAPORTE (núcleo do seu projeto) ========== -->
+<section id="passaporte" class="page">
+  <div class="card">
+    <h2>Meu Passaporte Digital</h2>
+    <p class="muted">O registo das suas competências, certificados e projetos. Este é o centro da sua trajetória.</p>
+  </div>
+
+  <!-- Perfil -->
+  <div class="card">
+    <h3>Perfil do Aluno</h3>
+    <label>Nome completo</label>
+    <input id="nome" placeholder="Digite o seu nome">
+    <div class="two-col">
+      <div>
+        <label>Classe</label>
+        <input id="classe" placeholder="Ex.: 11ª classe">
+      </div>
+      <div>
+        <label>Número do aluno</label>
+        <input id="numero" placeholder="Número">
+      </div>
+    </div>
+    <label>Objetivo principal</label>
+    <textarea id="objetivo" placeholder="O que pretende alcançar?"></textarea>
+    <button class="btn" onclick="saveProfile()">Guardar perfil</button>
+    <p id="perfilMsg" class="muted"></p>
+  </div>
+
+  <!-- Competências -->
+  <div class="card">
+    <h3>Competências</h3>
+    <label>Nova competência</label>
+    <input id="comp" placeholder="Ex.: Informática, comunicação, eletricidade...">
+    <button class="btn" onclick="addComp()">Adicionar</button>
+    <div id="compList"></div>
+  </div>
+
+  <!-- Certificados -->
+  <div class="card">
+    <h3>Certificados</h3>
+    <label>Nome do certificado</label>
+    <input id="cert" placeholder="Ex.: Curso de Informática">
+    <label>Data</label>
+    <input id="certDate" type="date">
+    <button class="btn" onclick="addCert()">Adicionar</button>
+    <div id="certList"></div>
+  </div>
+
+  <!-- Projetos -->
+  <div class="card">
+    <h3>Projetos e Experiências</h3>
+    <label>Título</label>
+    <input id="proj" placeholder="Nome do projeto">
+    <label>Descrição</label>
+    <textarea id="projDesc" placeholder="Descreva o que fez..."></textarea>
+    <label>Função desempenhada</label>
+    <input id="projFunc" placeholder="Ex.: Pesquisa e apresentação">
+    <button class="btn" onclick="addProj()">Adicionar projeto</button>
+    <div id="projList"></div>
+  </div>
+</section>
+
+<!-- ========== MEU CAMINHO (do Passaporte + Orientação) ========== -->
+<section id="caminho" class="page">
+  <div class="card">
+    <h2>Meu Caminho</h2>
+    <p class="muted">Esta área ajuda o estudante a refletir sobre possibilidades. Não determina uma profissão. Combina a reflexão pessoal com a orientação académica do EDUCA+.</p>
+
+    <label>Quais matérias você mais gosta?</label>
+    <input id="materias" placeholder="Ex.: Matemática, Informática, Física...">
+
+    <label>Quais são os seus principais interesses?</label>
+    <textarea id="interesses" placeholder="Ex.: Tecnologia, ajudar pessoas, construir coisas..."></textarea>
+
+    <label>Que competências deseja desenvolver?</label>
+    <textarea id="desenvolver" placeholder="Ex.: Programação, comunicação, liderança..."></textarea>
+
+    <label>Que área gostaria de pesquisar?</label>
+    <input id="area" placeholder="Ex.: tecnologia, eletricidade, saúde, gestão...">
+
+    <button class="btn" onclick="savePath()">Guardar reflexão</button>
+    <p id="pathMsg" class="muted"></p>
+  </div>
+
+  <div class="card">
+    <h3>Sugestão rápida (com base na sua reflexão)</h3>
+    <p class="muted" id="sugestao">Preencha e guarde a reflexão acima para ver uma orientação simples.</p>
+  </div>
+</section>
+
+<!-- ========== PARTILHA ========== -->
+<section id="partilha" class="page">
+  <div class="card">
+    <h2>Partilha controlada do Passaporte</h2>
+    <p>O QR Code abaixo representa um endereço de demonstração do seu perfil. Em versão real, a escola deve definir regras de privacidade e validação.</p>
+    <button class="btn" onclick="makeQR()">Gerar QR Code do Passaporte</button>
+    <div id="qr"></div>
+    <p id="shareText" class="muted"></p>
+  </div>
+
+  <div class="card">
+    <h3>O que é partilhado?</h3>
+    <ul class="feature-list">
+      <li>Nome e classe (do perfil)</li>
+      <li>Lista de competências</li>
+      <li>Títulos dos projetos</li>
+      <li>Não partilha dados sensíveis automaticamente</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  EDUCA+ Passaporte · Plataforma digital de apoio à educação em Moçambique<br>
+  Protótipo escolar de TICs · Aprender. Construir. Transformar.
+</footer>
+
+<script>
+const get = (k, d = []) => JSON.parse(localStorage.getItem(k) || JSON.stringify(d));
+const set = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+
+function show(id, btn) {
+  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  render();
+}
+
+function saveProfile() {
+  set('profile', {
+    nome: document.getElementById('nome').value,
+    classe: document.getElementById('classe').value,
+    numero: document.getElementById('numero').value,
+    objetivo: document.getElementById('objetivo').value
+  });
+  document.getElementById('perfilMsg').textContent = 'Perfil guardado neste dispositivo.';
+}
+
+function addComp() {
+  let v = document.getElementById('comp').value.trim();
+  if (!v) return;
+  let a = get('comp');
+  a.push(v);
+  set('comp', a);
+  document.getElementById('comp').value = '';
+  render();
+}
+
+function addCert() {
+  let v = document.getElementById('cert').value.trim();
+  if (!v) return;
+  let a = get('cert');
+  a.push({ nome: v, data: document.getElementById('certDate').value });
+  set('cert', a);
+  document.getElementById('cert').value = '';
+  render();
+}
+
+function addProj() {
+  let v = document.getElementById('proj').value.trim();
+  if (!v) return;
+  let a = get('proj');
+  a.push({
+    nome: v,
+    desc: document.getElementById('projDesc').value,
+    func: document.getElementById('projFunc').value
+  });
+  set('proj', a);
+  document.getElementById('proj').value = '';
+  document.getElementById('projDesc').value = '';
+  document.getElementById('projFunc').value = '';
+  render();
+}
+
+function savePath() {
+  const data = {
+    materias: document.getElementById('materias').value,
+    interesses: document.getElementById('interesses').value,
+    desenvolver: document.getElementById('desenvolver').value,
+    area: document.getElementById('area').value
+  };
+  set('path', data);
+  document.getElementById('pathMsg').textContent = 'Reflexão guardada neste dispositivo.';
+
+  // Sugestão simples
+  let sug = 'Com base no que escreveu: ';
+  const area = (data.area || '').toLowerCase();
+  const mat = (data.materias || '').toLowerCase();
+  if (area.includes('tecnolog') || area.includes('inform') || mat.includes('inform')) {
+    sug += 'pode explorar a área de Tecnologias (programação, redes, suporte). Veja também os materiais de Informática e os exercícios de lógica.';
+  } else if (area.includes('eletric') || mat.includes('física')) {
+    sug += 'a área Técnica/Industrial (eletricidade, mecânica) pode ser interessante. Há material de Eletricidade Básica disponível.';
+  } else if (area.includes('saúde')) {
+    sug += 'considere pesquisar cursos na área da Saúde e programas de estágio relacionados.';
+  } else if (area.includes('gest') || area.includes('admin')) {
+    sug += 'a área de Gestão e Economia pode alinhar-se com os seus interesses. Explore também bolsas de mérito.';
+  } else {
+    sug += 'continue a explorar as áreas de Orientação Académica e preencha mais detalhes para receber orientações mais precisas.';
+  }
+  document.getElementById('sugestao').textContent = sug;
+}
+
+function removeItem(k, i) {
+  let a = get(k);
+  a.splice(i, 1);
+  set(k, a);
+  render();
+}
+
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, m => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+  }[m]));
+}
+
+function render() {
+  const p = get('profile', {});
+  const c = get('comp');
+  const ce = get('cert');
+  const pr = get('proj');
+  const path = get('path', {});
+
+  ['nome', 'classe', 'numero', 'objetivo'].forEach(id => {
+    if (document.getElementById(id) && p[id] !== undefined) document.getElementById(id).value = p[id];
+  });
+  ['materias', 'interesses', 'desenvolver', 'area'].forEach(id => {
+    if (document.getElementById(id) && path[id] !== undefined) document.getElementById(id).value = path[id];
+  });
+
+  document.getElementById('compList').innerHTML = c.map((x, i) =>
+    `<div class="item"><span class="tag">${escapeHtml(x)}</span>
+     <button class="btn danger" style="padding:5px 10px;font-size:12px" onclick="removeItem('comp',${i})">Remover</button></div>`
+  ).join('');
+
+  document.getElementById('certList').innerHTML = ce.map((x, i) =>
+    `<div class="item"><b>${escapeHtml(x.nome)}</b>
+     <div class="muted">${x.data || 'Data não indicada'}</div>
+     <button class="btn danger" style="padding:5px 10px;font-size:12px" onclick="removeItem('cert',${i})">Remover</button></div>`
+  ).join('');
+
+  document.getElementById('projList').innerHTML = pr.map((x, i) =>
+    `<div class="item"><b>${escapeHtml(x.nome)}</b>
+     <p style="font-size:13px;margin:4px 0">${escapeHtml(x.desc)}</p>
+     <div class="muted">Função: ${escapeHtml(x.func)}</div>
+     <button class="btn danger" style="padding:5px 10px;font-size:12px" onclick="removeItem('proj',${i})">Remover</button></div>`
+  ).join('');
+
+  document.getElementById('nComp').textContent = c.length;
+  document.getElementById('nCert').textContent = ce.length;
+  document.getElementById('nProj').textContent = pr.length;
+}
+
+function makeQR() {
+  const profile = get('profile', {});
+  const data = encodeURIComponent(JSON.stringify({
+    nome: profile.nome || 'Aluno',
+    classe: profile.classe || '',
+    competencias: get('comp'),
+    projetos: get('proj').map(x => x.nome)
+  }));
+  const url = 'https://quickchart.io/qr?size=220&text=' + data;
+  document.getElementById('qr').innerHTML = '<img width="220" height="220" alt="QR Code" src="' + url + '">';
+  document.getElementById('shareText').textContent = 'QR Code gerado para demonstração. É necessária internet para carregar a imagem.';
+}
+
+render();
+</script>
+</body>
+</html>
